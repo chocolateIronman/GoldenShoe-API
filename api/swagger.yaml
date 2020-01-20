@@ -1,0 +1,338 @@
+---
+swagger: "2.0"
+info:
+  description: "No description"
+  version: "1.0.0"
+  title: "GoldenShoe"
+  contact:
+    email: "chocolateironman98@gmail.com"
+host: "localhost:8080"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /product:
+    get:
+      tags:
+      - "Product"
+      summary: "Loads a list of products"
+      operationId: "getProducts"
+      produces:
+      - "application/json"
+      - "application/x-yaml"
+      - "application/xml"
+      - "text/xml"
+      parameters: []
+      responses:
+        "200":
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+        "400":
+          description: "Status 400"
+        "401":
+          description: "Unauthorized"
+      x-swagger-router-controller: "Product"
+    post:
+      tags:
+      - "Product"
+      summary: "Adds a product"
+      operationId: "postProduct"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      responses:
+        "200":
+          description: "The product has been saved"
+          schema:
+            $ref: "#/definitions/Product"
+        "400":
+          description: "The product already exists"
+        "401":
+          description: "Unauthorized"
+      x-swagger-router-controller: "Product"
+  /project/{ProductID}:
+    get:
+      tags:
+      - "Product"
+      summary: "Loads a product"
+      operationId: "getProduct"
+      parameters:
+      - name: "ProductID"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Status 200"
+        "400":
+          description: "Status 400"
+        "401":
+          description: "Unauthorized"
+      x-swagger-router-controller: "Product"
+    put:
+      tags:
+      - "Product"
+      summary: "Updates a product"
+      operationId: "putProduct"
+      parameters:
+      - name: "ProductID"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      responses:
+        "200":
+          description: "Status 200"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+      x-swagger-router-controller: "Product"
+    delete:
+      tags:
+      - "Product"
+      summary: "Deletes a product"
+      operationId: "deleteProduct"
+      parameters:
+      - name: "ProductID"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Status 200"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+      x-swagger-router-controller: "Product"
+  /Category:
+    get:
+      tags:
+      - "Category"
+      summary: "Loads a list of categories"
+      operationId: "getCategories"
+      parameters:
+      - name: "name"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        "200":
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Category"
+        "404":
+          description: "Status 404"
+      x-swagger-router-controller: "Category"
+    post:
+      tags:
+      - "Category"
+      summary: "Adds a category"
+      operationId: "postCategory"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Category"
+      responses:
+        "200":
+          description: "The category is created"
+        "400":
+          description: "The category already exists"
+        "401":
+          description: "Unauthorized"
+      x-swagger-router-controller: "Category"
+  /Category/{categoryID}:
+    get:
+      tags:
+      - "Category"
+      summary: "Loads a project category"
+      operationId: "getCategory"
+      parameters:
+      - name: "categoryID"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "The category exists"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "The category doesn't exist"
+      x-swagger-router-controller: "Category"
+    delete:
+      tags:
+      - "Category"
+      summary: "Deletes a category"
+      operationId: "deleteCategory"
+      parameters:
+      - name: "categoryID"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Status 200"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+      x-swagger-router-controller: "Category"
+  /Colour:
+    get:
+      tags:
+      - "Colour"
+      summary: "Loads a list of colours"
+      operationId: "getColours"
+      parameters:
+      - name: "name"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        "200":
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Colour"
+        "404":
+          description: "Status 404"
+      x-swagger-router-controller: "Colour"
+    post:
+      tags:
+      - "Colour"
+      summary: "Adds a colour"
+      operationId: "postColour"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Colour"
+      responses:
+        "200":
+          description: "The colour is created"
+        "400":
+          description: "The colour already exists"
+        "401":
+          description: "Unauthorized"
+      x-swagger-router-controller: "Colour"
+  /Colour/{colourID}:
+    get:
+      tags:
+      - "Colour"
+      summary: "Loads a colour"
+      operationId: "getColour"
+      parameters:
+      - name: "colourID"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "The colour exists"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "The colour doesn't exist"
+      x-swagger-router-controller: "Colour"
+    delete:
+      tags:
+      - "Colour"
+      summary: "Deletes a colour"
+      operationId: "deleteColour"
+      parameters:
+      - name: "colourID"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Status 200"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+      x-swagger-router-controller: "Colour"
+definitions:
+  Product:
+    type: "object"
+    required:
+    - "category"
+    - "colour"
+    - "description"
+    - "name"
+    - "price"
+    - "quantity"
+    properties:
+      name:
+        type: "string"
+      category:
+        type: "string"
+      description:
+        type: "string"
+      quantity:
+        type: "integer"
+      price:
+        type: "string"
+      colour:
+        type: "string"
+    description: "parameters needed to create a product"
+    example:
+      name: "name"
+      category: "uuid"
+      description: "description"
+      quantity: 1
+      price: "price"
+      colour: "colour"
+  Colour:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+    description: "parameters needed to create a colour"
+    example:
+      name: "colour"
+  Category:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+    description: "parameters needed to create a category"
+    example:
+      name: "category"
