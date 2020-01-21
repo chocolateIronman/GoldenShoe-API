@@ -1,0 +1,1 @@
+SELECT * FROM "Product" WHERE "Product".id=$1

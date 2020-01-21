@@ -1,0 +1,1 @@
+DELETE FROM "ProductToColourMapping" WHERE "ProductToColourMapping".product=$1;

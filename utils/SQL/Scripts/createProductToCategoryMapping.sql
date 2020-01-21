@@ -1,0 +1,1 @@
+INSERT INTO "ProductToCategoryMapping" ("product","category") VALUES ($1,$2) RETURNING *

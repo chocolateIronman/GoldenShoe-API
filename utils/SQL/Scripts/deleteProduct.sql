@@ -1,0 +1,1 @@
+DELETE FROM "Product" WHERE "Product".id=$1

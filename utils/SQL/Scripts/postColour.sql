@@ -1,0 +1,1 @@
+INSERT INTO "Colour" (name) VALUES ($1) RETURNING *

@@ -1,0 +1,1 @@
+UPDATE "Product" SET "name"=$2, "description"=$3, "quantity"=$4, "price"=$5 WHERE "Product".id=$1 RETURNING *

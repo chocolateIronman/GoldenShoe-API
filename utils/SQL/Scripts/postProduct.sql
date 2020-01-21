@@ -1,0 +1,1 @@
+INSERT INTO "Product" ("name","description","quantity","price") VALUES ($1,$2,$3,$4) RETURNING *
