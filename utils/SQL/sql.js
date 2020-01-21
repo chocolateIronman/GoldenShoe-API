@@ -57,7 +57,7 @@ class Sql {
         var parameters=[id];
 
         //single query wrapped in multi query stuff
-        var query = genApi.gen("getProduct",parameters);
+        var query = genApi.gen("getProductAll",parameters);
         var response = await dbApi.multiQuery([query]);
 
         if(response[0].rows.length>0){
@@ -157,7 +157,7 @@ class Sql {
         var query=genApi.gen("deleteCategory",parameters);
         var responses = await dbApi.multiQuery([query]);
 
-        if(response[0].rows.length>0){
+        if(responses[0].rows.length>0){
             result = responses[0].rows;
         }
 
@@ -217,7 +217,7 @@ class Sql {
         var query=genApi.gen("deleteColour",parameters);
         var responses = await dbApi.multiQuery([query]);
 
-        if(response[0].rows.length>0){
+        if(responses[0].rows.length>0){
             result = responses[0].rows;
         }
 
@@ -226,3 +226,4 @@ class Sql {
 }
 
 
+module.exports = Sql;

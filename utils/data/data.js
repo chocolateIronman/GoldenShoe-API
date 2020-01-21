@@ -33,7 +33,7 @@ var doPostProduct=async(name,description,quantity,price,category,colour)=>{
     result=await Sql.postProduct(name,description,quantity,price,category,colour);
     return result;
 }
-var postProduct=async(name,description,quantity,price)=>{
+var postProduct=async(name,description,quantity,price,category,colour)=>{
     var result=[];
     if(isEmpty(name)) throw errorApi.create400Error("Parameter 'name' is null. ");
     if(isEmpty(description)) throw errorApi.create400Error("Parameter 'description' is null. ");
@@ -66,7 +66,7 @@ var getProduct = async(id)=>{
         result = await doGetProduct(id);
     }catch(error){
         console.log(error.message);
-        throw errorApi.create500Error("SQL Error";)
+        throw errorApi.create500Error("SQL Error");
     }
 
     return result;
@@ -195,7 +195,7 @@ var deleteCategory=async(id)=>{
 }
 
 //--------------COLOUR----------------------------
-var doGetColour=async()=>{
+var doGetColours=async()=>{
     var result=null;
     result=await Sql.getColours();
     return result;
@@ -234,7 +234,7 @@ var getColour=async(id)=>{
 
 var doPostColour=async(name)=>{
     var result=[];
-    result = await Sql.postCategory(name);
+    result = await Sql.postColour(name);
     return result;
 }
 var postColour=async(name)=>{

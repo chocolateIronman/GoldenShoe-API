@@ -1,13 +1,21 @@
 'use strict';
 
 var fs = require('fs'),
-    path = require('path'),
-    http = require('http');
+  path = require('path'),
+  http = require('http');
 
 var app = require('connect')();
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort = 8080;
+
+var database = require('./utils/database/databaseService');
+var dbUrl = process.env.DATABASE_URL;
+
+var cors = require('cors');
+
+// database connection
+database.initialise(dbUrl, false);
 
 // swaggerRouter configuration
 var options = {
@@ -17,7 +25,7 @@ var options = {
 };
 
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
-var spec = fs.readFileSync(path.join(__dirname,'api/swagger.yaml'), 'utf8');
+var spec = fs.readFileSync(path.join(__dirname, 'api/swagger.yaml'), 'utf8');
 var swaggerDoc = jsyaml.safeLoad(spec);
 
 // Initialize the Swagger middleware
@@ -34,6 +42,11 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi());
+
+  // Cross Origin Requests - must have this, as we are an API.
+  // Without it, browsers running SPWAs from domains different to ours (e.g. github pages)
+  // will reject HTTP requests during pre-flight check.
+  app.use(cors());
 
   // Start the server
   http.createServer(app).listen(serverPort, function () {

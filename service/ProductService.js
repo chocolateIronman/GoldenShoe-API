@@ -1,5 +1,7 @@
 'use strict';
 
+var database = require("../utils/data/data");
+var httpUtil = require("../utils/http/http");
 
 /**
  * Deletes a product
@@ -7,10 +9,21 @@
  * productID String 
  * no response value expected for this operation
  **/
-exports.deleteProduct = function(productID) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.deleteProduct = function(args,res,next) {
+  var id=args.ProductID.value || null;
+
+  database.deleteProduct(
+    id
+  ).then(
+    (result)=>{
+      httpUtil.endHttpOK(result,res);
+    }
+  ).catch(
+    (error)=>{
+      httpUtil.endHttpErr(error,res);
+    }
+
+    )
 }
 
 
@@ -20,10 +33,19 @@ exports.deleteProduct = function(productID) {
  * productID String 
  * no response value expected for this operation
  **/
-exports.getProduct = function(productID) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.getProduct = function(args,res,next) {
+  var id=args.ProductID.value || null;
+  database.getProduct(
+    id
+  ).then(
+    (result)=>{
+      httpUtil.endHttpOK(result,res);
+    }
+  ).catch(
+    (error)=>{
+      httpUtil.endHttpErr(error,res);
+    }
+  )
 }
 
 
@@ -32,30 +54,18 @@ exports.getProduct = function(productID) {
  *
  * returns List
  **/
-exports.getProducts = function() {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "name" : "name",
-  "category" : "uuid",
-  "description" : "description",
-  "quantity" : 1,
-  "price" : "price",
-  "colour" : "colour"
-}, {
-  "name" : "name",
-  "category" : "uuid",
-  "description" : "description",
-  "quantity" : 1,
-  "price" : "price",
-  "colour" : "colour"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.getProducts = function(args,res,next) {
+  database.getProducts(
+
+  ).then(
+    (result)=>{
+      httpUtil.endHttpOK(result,res);
     }
-  });
+  ).catch(
+    (error)=>{
+      httpUtil.endHttpErr(error,res);
+    }
+  )
 }
 
 
@@ -65,23 +75,30 @@ exports.getProducts = function() {
  * body Product 
  * returns Product
  **/
-exports.postProduct = function(body) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "name" : "name",
-  "category" : "uuid",
-  "description" : "description",
-  "quantity" : 1,
-  "price" : "price",
-  "colour" : "colour"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.postProduct = function(args,res,next) {
+  var name=args.body.value.name || null;
+  var description=args.body.value.description || null;
+  var quantity=args.body.value.quantity || null;
+  var price=args.body.value.price || null;
+  var category=args.body.value.category || null;
+  var colour=args.body.value.colour || null;
+
+  database.postProduct(
+    name,
+    description,
+    quantity,
+    price,
+    category,
+    colour
+  ).then(
+    (result)=>{
+      httpUtil.endHttpOK(result,res);
     }
-  });
+  ).catch(
+    (error)=>{
+      httpUtil.endHttpErr(error,res);
+    }
+  )
 }
 
 
@@ -92,9 +109,31 @@ exports.postProduct = function(body) {
  * body Product 
  * no response value expected for this operation
  **/
-exports.putProduct = function(productID,body) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.putProduct = function(args,res,next) {
+  var id=args.ProductID.value || null;
+  var name=args.body.value.name || null;
+  var description=args.body.value.description || null;
+  var quantity=args.body.value.quantity || null;
+  var price=args.body.value.price || null;
+  var category=args.body.value.category || null;
+  var colour=args.body.value.colour || null;
+
+  database.putProduct(
+    id,
+    name,
+    description,
+    quantity,
+    price,
+    category,
+    colour
+  ).then(
+    (result)=>{
+      httpUtil.endHttpOK(result,res);
+    }
+  ).catch(
+    (error)=>{
+      httpUtil.endHttpErr(error,res);
+    }
+  )
 }
 

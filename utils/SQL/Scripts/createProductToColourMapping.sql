@@ -1,1 +1,1 @@
-INSERT INTO "ProductToCategoryMapping" ("product","colour") VALUES ($1,$2) RETURNING *
+INSERT INTO "ProductToColourMapping" ("product","colour") VALUES ($1,$2) RETURNING *

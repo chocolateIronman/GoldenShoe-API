@@ -1,5 +1,8 @@
 'use strict';
 
+var database=require("../utils/data/data");
+var httpUtil=require("../utils/http/http");
+
 
 /**
  * Deletes a colour
@@ -7,10 +10,20 @@
  * colourID String 
  * no response value expected for this operation
  **/
-exports.deleteColour = function(colourID) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.deleteColour = function(args,res,next) {
+  var id=args.colourID.value || null;
+
+  database.deleteColour(
+    id
+  ).then(
+    (result)=>{
+      httpUtil.endHttpOK(result,res);
+    }
+  ).catch(
+    (error)=>{
+      httpUtil.endHttpErr(error,res);
+    }
+  )
 }
 
 
@@ -20,10 +33,19 @@ exports.deleteColour = function(colourID) {
  * colourID String 
  * no response value expected for this operation
  **/
-exports.getColour = function(colourID) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.getColour = function(args,res,next) {
+  var id=args.colourID.value || null;
+  database.getColour(
+    id
+  ).then(
+    (result)=>{
+      httpUtil.endHttpOK(result,res);
+    }
+  ).catch(
+    (error)=>{
+      httpUtil.endHttpErr(error,res);
+    }
+  )
 }
 
 
@@ -33,20 +55,18 @@ exports.getColour = function(colourID) {
  * name String  (optional)
  * returns List
  **/
-exports.getColours = function(name) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "name" : "colour"
-}, {
-  "name" : "colour"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.getColours = function(args,res,next) {
+  var name=args.name.value || null;
+
+  database.getColours(name).then(
+    (result)=>{
+      httpUtil.endHttpOK(result,res);
     }
-  });
+  ).catch(
+    (error)=>{
+      httpUtil.endHttpErr(error,res);
+    }
+  )
 }
 
 
@@ -56,9 +76,19 @@ exports.getColours = function(name) {
  * body Colour 
  * no response value expected for this operation
  **/
-exports.postColour = function(body) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.postColour = function(args,res,next) {
+  var name=args.body.value.name || null;
+
+  database.postColour(
+    name
+  ).then(
+    (result)=>{
+      httpUtil.endHttpOK(result,res);
+    }
+  ).catch(
+    (error)=>{
+      httpUtil.endHttpErr(error,res);
+    }
+  )
 }
 

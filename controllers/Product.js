@@ -4,56 +4,21 @@ var utils = require('../utils/writer.js');
 var Product = require('../service/ProductService');
 
 module.exports.deleteProduct = function deleteProduct (req, res, next) {
-  var productID = req.swagger.params['ProductID'].value;
-  Product.deleteProduct(productID)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+  Product.deleteProduct(req.swagger.params,res,next);
 };
 
 module.exports.getProduct = function getProduct (req, res, next) {
-  var productID = req.swagger.params['ProductID'].value;
-  Product.getProduct(productID)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+  Product.getProduct(req.swagger.params,res,next);
 };
 
 module.exports.getProducts = function getProducts (req, res, next) {
-  Product.getProducts()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+  Product.getProducts(req.swagger.params,res,next);
 };
 
 module.exports.postProduct = function postProduct (req, res, next) {
-  var body = req.swagger.params['body'].value;
-  Product.postProduct(body)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+  Product.postProduct(req.swagger.params,res,next);
 };
 
 module.exports.putProduct = function putProduct (req, res, next) {
-  var productID = req.swagger.params['ProductID'].value;
-  var body = req.swagger.params['body'].value;
-  Product.putProduct(productID,body)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+  Product.putProduct(req.swagger.params,res,next);
 };

@@ -1,5 +1,8 @@
 'use strict';
 
+var database=require("../utils/data/data");
+var httpUtil= require("../utils/http/http");
+
 
 /**
  * Deletes a category
@@ -7,10 +10,20 @@
  * categoryID String 
  * no response value expected for this operation
  **/
-exports.deleteCategory = function(categoryID) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.deleteCategory = function(args,res,next) {
+  var id=args.categoryID.value || null; //match whats in the swagger file
+
+  database.deleteCategory(
+    id
+  ).then(
+    (result)=>{
+      httpUtil.endHttpOK(result,res);
+    }
+  ).catch(
+    (error)=>{
+      httpUtil.endHttpErr(error,res);
+    }
+  )
 }
 
 
@@ -20,20 +33,17 @@ exports.deleteCategory = function(categoryID) {
  * name String  (optional)
  * returns List
  **/
-exports.getCategories = function(name) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "name" : "category"
-}, {
-  "name" : "category"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.getCategories = function(args,res,next) {
+
+  database.getCategories().then(
+    (result)=>{
+      httpUtil.endHttpOK(result,res);
     }
-  });
+  ).catch(
+    (error)=>{
+      httpUtil.endHttpErr(error,res);
+    }
+  )
 }
 
 
@@ -43,10 +53,19 @@ exports.getCategories = function(name) {
  * categoryID String 
  * no response value expected for this operation
  **/
-exports.getCategory = function(categoryID) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.getCategory = function(args,res,next) {
+  var id = args.categoryID.value || null;
+  database.getCategory(
+    id
+  ).then(
+    (result)=>{
+      httpUtil.endHttpOK(result,res);
+    }
+  ).catch(
+    (error)=>{
+      httpUtil.endHttpErr(error,res);
+    }
+  )
 }
 
 
@@ -56,9 +75,19 @@ exports.getCategory = function(categoryID) {
  * body Category 
  * no response value expected for this operation
  **/
-exports.postCategory = function(body) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.postCategory = function(args,res,next) {
+  var name=args.body.value.name || null;
+
+  database.postCategory(
+    name
+  ).then(
+    (result)=>{
+      httpUtil.endHttpOK(result,res);
+    }
+  ).catch(
+    (error)=>{
+      httpUtil.endHttpErr(error,res);
+    }
+  )
 }
 
