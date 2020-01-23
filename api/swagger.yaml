@@ -6,9 +6,9 @@ info:
   title: "GoldenShoe"
   contact:
     email: "chocolateironman98@gmail.com"
-host: "localhost:8080"
+host: "goldenshoeapi.herokuapp.com"
 schemes:
-- "http"
+- "https"
 consumes:
 - "application/json"
 produces:
