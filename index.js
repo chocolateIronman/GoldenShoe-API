@@ -9,10 +9,12 @@ var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort =process.env.PORT || 8080;
 
+var cors = require('cors');
+
 var database = require('./utils/database/databaseService');
 var dbUrl = process.env.DATABASE_URL;
 
-var cors = require('cors');
+
 
 // database connection
 database.initialise(dbUrl, false);
