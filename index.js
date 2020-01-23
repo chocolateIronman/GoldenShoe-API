@@ -3,18 +3,21 @@
 var fs = require('fs'),
   path = require('path'),
   http = require('http');
+var cors = require('cors');
 
 var app = require('connect')();
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort =process.env.PORT || 8080;
 
-var cors = require('cors');
 
 var database = require('./utils/database/databaseService');
 var dbUrl = process.env.DATABASE_URL;
 
-
+// Cross Origin Requests - must have this, as we are an API.
+  // Without it, browsers running SPWAs from domains different to ours (e.g. github pages)
+  // will reject HTTP requests during pre-flight check.
+  app.use(cors());
 
 // database connection
 database.initialise(dbUrl, false);
@@ -45,10 +48,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi());
 
-  // Cross Origin Requests - must have this, as we are an API.
-  // Without it, browsers running SPWAs from domains different to ours (e.g. github pages)
-  // will reject HTTP requests during pre-flight check.
-  app.use(cors());
+  
 
   // Start the server
   http.createServer(app).listen(serverPort, function () {
