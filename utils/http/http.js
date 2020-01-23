@@ -5,7 +5,7 @@ var errorApi = require("../error");
 var endHttpOK = (result, response) => {
     var params = {};
     params["application/json"] = result;
-    response.setHeader("Content-Type", "application/json");
+    response.setHeader("Content-Type", "application/json","Access-Control-Allow-Origin",'*');
     response.end(JSON.stringify(params[Object.keys(params)[0]] || {}, null, 2));
 };
 
