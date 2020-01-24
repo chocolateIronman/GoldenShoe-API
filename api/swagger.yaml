@@ -63,7 +63,7 @@ paths:
         "401":
           description: "Unauthorized"
       x-swagger-router-controller: "Product"
-  /project/{ProductID}:
+  /product/{ProductID}:
     get:
       tags:
       - "Product"
